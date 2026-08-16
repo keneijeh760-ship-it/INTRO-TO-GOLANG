@@ -16,70 +16,10 @@ func main() {
 	var bookings = []string{}
 	var Email string
 	var city string
-	isValidUserName := len(username) >= 2
-	isValidUserTickets := userTickets > 0
-	isValidEmail := strings.Contains(Email, "@")
 
 	for remainingTickets > 0 && len(bookings) < 50 {
 
-		fmt.Println("What is your name? ")
-
-		fmt.Scan(&username)
-
-		if !isValidUserName {
-			fmt.Printf("%v is not a valid name broo", username)
-
-		} else {
-			continue
-		}
-		fmt.Println("Please enter your email: ")
-		fmt.Scan(&Email)
-
-		if !isValidEmail {
-			fmt.Printf("%v is not a valid email address", Email)
-		} else {
-			continue
-		}
-		fmt.Println("How many tickets do you wanna get? ")
-		fmt.Scan(&userTickets)
-
-		fmt.Println("What city are you booking it for? ")
-		fmt.Scan(&city)
-
-		switch city {
-		case "New York":
-			fmt.Println("You are booking for New York")
-		case "Los Angeles":
-			fmt.Println("You are booking for Los Angeles")
-		case "Chicago":
-			fmt.Println("You are booking for Chicago")
-		default:
-			fmt.Println("You are not booking for any of the cities we have tickets for")
-		}
-
-		if userTickets > remainingTickets {
-			fmt.Printf("You can't do that nigga, there only %v tickets left! \n Basically you cannot buy %v tickets\n", remainingTickets, userTickets)
-			break
-		} else if !isValidUserTickets {
-			fmt.Printf("You cannot do that bruh, are you an idiot? \n how do you wanna order %v tickets", userTickets)
-		} else {
-
-			remainingTickets -= userTickets
-
-			bookings = append(bookings, username)
-
-			fmt.Printf("Hello %v, you have %v tickets!\n", username, userTickets)
-			fmt.Printf("There are now %v tickets left!\n", remainingTickets)
-
-			var newTable = []string{}
-
-			for _, booking := range bookings {
-				var firstname = strings.Fields(booking)
-				var name = firstname[0]
-				newTable = append(newTable, name)
-
-			}
-		}
+		userInput(username, Email, userTickets, city, remainingTickets, bookings)
 
 	}
 
@@ -87,6 +27,75 @@ func main() {
 
 func greetingStatement(confName string, ticketNumber int, remainingTcikets int) {
 
-	fmt.Printf("Welcome to %v, we have about  %v available with v tickets remaining, just giv us your email and where you book atand you would be ready to go")
+	fmt.Printf("Welcome to %v, we have about  %v available with %v tickets remaining, just giv us your email and where you book atand you would be ready to go", confName, ticketNumber, remainingTcikets)
 
+}
+
+func userInput(username string, Email string, userTickets int, city string, remainingTickets int, bookings []string) {
+	fmt.Println("What is your name? ")
+
+	fmt.Scan(&username)
+
+	isValidUserName, isValidUserTickets, isValidEmail := ValidInput(username, Email, userTickets)
+
+	if !isValidUserName {
+		fmt.Printf("%v is not a valid name broo", username)
+
+	}
+	fmt.Println("Please enter your email: ")
+	fmt.Scan(&Email)
+
+	if !isValidEmail {
+		fmt.Printf("%v is not a valid email address", Email)
+	}
+	fmt.Println("How many tickets do you wanna get? ")
+	fmt.Scan(&userTickets)
+
+	if !isValidUserTickets {
+		fmt.Printf("%v is not a valid number of tickets", userTickets)
+	}
+
+	if userTickets > remainingTickets {
+		fmt.Printf("You can't do that nigga, there only %v tickets left! \n Basically you cannot buy %v tickets\n", remainingTickets, userTickets)
+
+	} else {
+
+		remainingTickets -= userTickets
+
+		bookings = append(bookings, username)
+
+		fmt.Printf("Hello %v, you have %v tickets!\n", username, userTickets)
+		fmt.Printf("There are now %v tickets left!\n", remainingTickets)
+
+		var newTable = []string{}
+
+		for _, booking := range bookings {
+			var firstname = strings.Fields(booking)
+			var name = firstname[0]
+			newTable = append(newTable, name)
+
+		}
+	}
+
+	fmt.Println("What city are you booking it for? ")
+	fmt.Scan(&city)
+
+	switch city {
+	case "New York":
+		fmt.Println("You are booking for New York")
+	case "Los Angeles":
+		fmt.Println("You are booking for Los Angeles")
+	case "Chicago":
+		fmt.Println("You are booking for Chicago")
+	default:
+		fmt.Println("You are not booking for any of the cities we have tickets for")
+	}
+
+}
+
+func ValidInput(username string, Email string, userTickets int) (bool, bool, bool) {
+	isValidUserName := len(username) >= 2
+	isValidUserTickets := userTickets > 0
+	isValidEmail := strings.Contains(Email, "@")
+	return isValidUserName, isValidUserTickets, isValidEmail
 }
