@@ -17,6 +17,7 @@ func main() {
 	var userTickets int
 	var bookings = []string{}
 	var Email string
+	var city string
 	isValidUserName := len(username) >= 2
 	isValidUserTickets := userTickets > 0
 	isValidEmail := strings.Contains(Email, "@")
@@ -43,6 +44,20 @@ func main() {
 		}
 		fmt.Println("How many tickets do you wanna get? ")
 		fmt.Scan(&userTickets)
+
+		fmt.Println("What city are you booking it for? ")
+		fmt.Scan(&city)
+
+		switch city {
+		case "New York":
+			fmt.Println("You are booking for New York")
+		case "Los Angeles":
+			fmt.Println("You are booking for Los Angeles")
+		case "Chicago":
+			fmt.Println("You are booking for Chicago")
+		default:
+			fmt.Println("You are not booking for any of the cities we have tickets for")
+		}
 
 		if userTickets > remainingTickets {
 			fmt.Printf("You can't do that nigga, there only %v tickets left! \n Basically you cannot buy %v tickets\n", remainingTickets, userTickets)
