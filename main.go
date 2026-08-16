@@ -17,38 +17,57 @@ func main() {
 	var userTickets int
 	var bookings = []string{}
 	var Email string
+	isValidUserName := len(username) >= 2
+	isValidUserTickets := userTickets > 0
+	isValidEmail := strings.Contains(Email, "@")
 
-	for {
+	for remainingTickets > 0 && len(bookings) < 50 {
 
 		fmt.Println("What is your name? ")
 
 		fmt.Scan(&username)
+
+		if !isValidUserName {
+			fmt.Printf("%v is not a valid name broo", username)
+
+		} else {
+			continue
+		}
 		fmt.Println("Please enter your email: ")
 		fmt.Scan(&Email)
+
+		if !isValidEmail {
+			fmt.Printf("%v is not a valid email address", Email)
+		} else {
+			continue
+		}
 		fmt.Println("How many tickets do you wanna get? ")
 		fmt.Scan(&userTickets)
 
 		if userTickets > remainingTickets {
 			fmt.Printf("You can't do that nigga, there only %v tickets left! \n Basically you cannot buy %v tickets\n", remainingTickets, userTickets)
 			break
+		} else if !isValidUserTickets {
+			fmt.Printf("You cannot do that bruh, are you an idiot? \n how do you wanna order %v tickets", userTickets)
+		} else {
+
+			remainingTickets -= userTickets
+
+			bookings = append(bookings, username)
+
+			fmt.Printf("Hello %v, you have %v tickets!\n", username, userTickets)
+			fmt.Printf("There are now %v tickets left!\n", remainingTickets)
+
+			var newTable = []string{}
+
+			for _, booking := range bookings {
+				var firstname = strings.Fields(booking)
+				var name = firstname[0]
+				newTable = append(newTable, name)
+
+			}
 		}
 
-		remainingTickets -= userTickets
-
-		bookings = append(bookings, username)
-
-		fmt.Printf("Hello %v, you have %v tickets!\n", username, userTickets)
-		fmt.Printf("There are now %v tickets left!\n", remainingTickets)
-
-		var newTable = []string{}
-
-		for _, booking := range bookings {
-
-			var firstname = strings.Fields(booking)
-			var name = firstname[0]
-			newTable = append(newTable, name)
-
-		}
 	}
 
 }
