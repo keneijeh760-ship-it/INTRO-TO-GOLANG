@@ -16,14 +16,22 @@ func main() {
 	var username string
 	var userTickets int
 	var bookings = []string{}
+	var Email string
 
 	for {
 
 		fmt.Println("What is your name? ")
 
 		fmt.Scan(&username)
+		fmt.Println("Please enter your email: ")
+		fmt.Scan(&Email)
 		fmt.Println("How many tickets do you wanna get? ")
 		fmt.Scan(&userTickets)
+
+		if userTickets > remainingTickets {
+			fmt.Printf("You can't do that nigga, there only %v tickets left! \n Basically you cannot buy %v tickets\n", remainingTickets, userTickets)
+			break
+		}
 
 		remainingTickets -= userTickets
 
