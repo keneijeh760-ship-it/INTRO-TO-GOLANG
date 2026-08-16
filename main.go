@@ -9,9 +9,7 @@ func main() {
 	var conferenceName = "Go Conference"
 	const conferenceTickets = 50
 	var remainingTickets = 50
-	fmt.Printf("Welcome to the %v Booking application\n", conferenceName)
-	fmt.Println("Get your tickets here to attend!")
-	fmt.Printf("There are %v tickets in total and %v tickets still available for purchase.\n", conferenceTickets, remainingTickets)
+	greetingStatement(conferenceName, conferenceTickets, remainingTickets)
 
 	var username string
 	var userTickets int
@@ -89,6 +87,6 @@ func main() {
 
 func greetingStatement(confName string, ticketNumber int, remainingTcikets int) {
 
-	fmt.Println("Welcome to %v, we have about  %v available with v tickets remaining, just giv us your email and where you book atand you would be ready to go")
+	fmt.Printf("Welcome to %v, we have about  %v available with v tickets remaining, just giv us your email and where you book atand you would be ready to go")
 
 }
