@@ -86,3 +86,9 @@ func main() {
 	}
 
 }
+
+func greetingStatement(confName string, ticketNumber int, remainingTcikets int) {
+
+	fmt.Println("Welcome to %v, we have about  %v available with v tickets remaining, just giv us your email and where you book atand you would be ready to go")
+
+}
