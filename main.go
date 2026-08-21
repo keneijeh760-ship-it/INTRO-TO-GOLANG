@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"intro-to-golang/helper"
 	"strings"
 )
 
@@ -36,7 +37,7 @@ func userInput(username string, Email string, userTickets int, city string, rema
 
 	fmt.Scan(&username)
 
-	isValidUserName, isValidUserTickets, isValidEmail := ValidInput(username, Email, userTickets)
+	isValidUserName, isValidUserTickets, isValidEmail := helper.ValidInput(username, Email, userTickets)
 
 	if !isValidUserName {
 		fmt.Printf("%v is not a valid name broo", username)
