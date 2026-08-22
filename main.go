@@ -93,3 +93,8 @@ func userInput(username string, Email string, userTickets int, city string, rema
 	}
 
 }
+
+func sendTicket(userTickets uint, Email string, username string) {
+	ticket := fmt.Sprintf("%v tickets for %v", userTickets, username)
+	fmt.Printf("Ticket sent to %v\n at %v", ticket, Email)
+}
